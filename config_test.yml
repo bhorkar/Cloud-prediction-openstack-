@@ -1,0 +1,41 @@
+rabbitmq_input:
+ type: 'stream' # encapsulate can consume hourly files or streaming inputs
+ stream_parameters:
+   collector_source : '135.197.226.53'
+   uname            : 'mountain'
+   pw               : 'The-hills-are-alive'
+   exchange         : 're_pusher'
+   flush_sherlock_msglist_interval: 100 #seconds	   
+ file_parameters:   #used for hourly files 
+   dir: './test' #not used for streaming data
+   server_ip: 'localhost'  #encapuslate needs to run on the server where files are available
+
+aic_zone_info:
+ zone_names:
+ - './'
+
+processing: 
+ ncores_per_zone : 1  #currently only supports one processor 
+
+analysis: 
+    transaction: 'vmcreation'
+    cache_flush_interval : 120
+    maxtransactionduration: 900 # seconds
+    save_all_logs : 0
+    save_capsules : 1
+
+debug: 
+    debug_file_flag : 0
+    startingdate: 2017-04-14
+    startingtime: '09-00-00'
+    debug_sherlock_flag : 0
+    debug_sherlock_file : './encapsulated_files/sherlock_test.csv'
+
+watchdog_parameter:
+ retry_new_notificationfile_interval_min : 2
+
+log:
+ enable_file_output : True
+ log_file : 'log.out'
+ log_level : 'DEBUG'
+

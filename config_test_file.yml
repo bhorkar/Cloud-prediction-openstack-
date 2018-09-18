@@ -1,0 +1,39 @@
+watchdog_parameter:
+ retry_new_notificationfile_interval_min : 2
+log: 
+ enable_file_output : True
+ log_file : 'log.out'
+ log_level : 'DEBUG'
+encalupated_out:
+ dir : 'encapsulated_files'
+rabbitmq_input:
+ type: 'file' # encapsulate can consume hourly files or streaming inputs
+ stream_parameters:
+   collector_source : '192.12.12.53'
+   uname            : 'temp'
+   pw         : 'pass'
+   exchange         : 're_pusher'
+   flush_sherlock_msglist_interval: 1800 #seconds	   
+ file_parameters:
+   dir: './test' #not used for streaming data
+   server_ip: 'localhost'  #encapuslate needs to run on the server where files are available
+aic_zone_info:
+ zone_names:
+ - './'
+processing: 
+ ncores_per_zone : 1
+cache_interval_minutes: 60 
+
+analysis: 
+    transaction: 'vmcreation'
+    cache_flush_interval : 105 
+    maxtransactionduration: 900 # seconds
+    save_all_logs : 0
+    save_capsules : 1
+
+debug: 
+    debug_file_flag : 1
+    debug_sherlock_flag : 0 
+    startingdate: 2017-04-14
+    startingtime: '09-00-00'
+
